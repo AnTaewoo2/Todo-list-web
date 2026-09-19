@@ -1,0 +1,275 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #eef3fb;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(230, 238, 252, 0.9)),
+    #eef3fb;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: 0;
+  display: block;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  filter: blur(10px);
+  opacity: 0.42;
+}
+
+body::before {
+  top: 8%;
+  left: -8rem;
+  background: radial-gradient(circle, #9dd8ff 0%, rgba(157, 216, 255, 0) 70%);
+  animation: drift-left 14s ease-in-out infinite alternate;
+}
+
+body::after {
+  right: -7rem;
+  bottom: 3%;
+  background: radial-gradient(circle, #c5b5ff 0%, rgba(197, 181, 255, 0) 70%);
+  animation: drift-right 18s ease-in-out infinite alternate;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2rem, 56rem);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.todo-container,
+.todo-app,
+.todo-list-container {
+  width: 100%;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 1.5rem 4rem rgba(48, 66, 105, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  color: #172033;
+  line-height: 1.2;
+}
+
+form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  margin: 1.5rem 0;
+}
+
+input,
+textarea,
+select,
+button {
+  min-height: 2.75rem;
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #c8d2e4;
+  border-radius: 0.6rem;
+  color: #172033;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 3px solid rgba(72, 126, 224, 0.35);
+  outline-offset: 2px;
+}
+
+button {
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.6rem;
+  color: #fff;
+  background: #3569c8;
+  cursor: pointer;
+  font-weight: 650;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+button:hover {
+  background: #2855a7;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.task,
+.task-item,
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e1e7f0;
+}
+
+.task:last-child,
+.task-item:last-child,
+.todo-item:last-child {
+  border-bottom: 0;
+}
+
+.task span,
+.task-item span,
+.todo-item span,
+.task label,
+.task-item label,
+.todo-item label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.task input[type="checkbox"],
+.task-item input[type="checkbox"],
+.todo-item input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  min-height: 0;
+  accent-color: #3569c8;
+}
+
+.completed {
+  color: #697386;
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1em;
+  opacity: 0.72;
+}
+
+.task.completed,
+.task-item.completed,
+.todo-item.completed {
+  background: rgba(226, 232, 242, 0.45);
+  border-radius: 0.5rem;
+}
+
+@keyframes drift-left {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(12rem, 4rem, 0) scale(1.18);
+  }
+}
+
+@keyframes drift-right {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+
+  to {
+    transform: translate3d(-10rem, -5rem, 0) scale(0.9);
+  }
+}
+
+@media (max-width: 600px) {
+  #root {
+    width: min(100% - 1rem, 40rem);
+    padding: 1rem 0;
+  }
+
+  .todo-container,
+  .todo-app,
+  .todo-list-container {
+    padding: 1rem;
+    border-radius: 0.9rem;
+  }
+
+  form {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  form button {
+    width: 100%;
+  }
+
+  .task,
+  .task-item,
+  .todo-item {
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.8rem 0.25rem;
+  }
+
+  .task button,
+  .task-item button,
+  .todo-item button {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (min-width: 900px) {
+  #root {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  form {
+    max-width: 48rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+
+  button {
+    transition: none;
+  }
+}
